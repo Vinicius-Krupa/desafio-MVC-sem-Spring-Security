@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="conteiner">
+		<div class="row">
+			<h1>Editar Usuário #<span th:text="${usuarioId}"></span></h1>
+		</div>
+	</div>
+	
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div class="card">
+	<div class="card-header">
+		<p class="text-primary">Editar Usuário</p>
+	</div>
+	<div class="card-body">
+		<form th:object="${requisicaoFormUsuario}" th:action="@{/usuario/detalhes(id = ${usuarioId})}" method="POST">
+	
+	<div th:replace="~{usuario/fragmentos :: form}">Formulário!</div>
+</div>
+</html>

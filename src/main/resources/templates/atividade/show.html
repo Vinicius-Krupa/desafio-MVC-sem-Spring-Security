@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="conteiner">
+		<div class="row">
+			<h1>Atividade #<span th:text="${atividade.id}"></span> <span th:text="${atividade.nome}"></span></h1>
+		</div>
+	</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<main>
+		<div class="container mt-4">
+			<div class="row">
+				<div class="col-12">
+				<div class="card-header">
+					<p class="text-primary">Detalhes</p>
+				</div>
+					<b>Evento: </b><a th:href="@{/evento/detalhes(id = ${atividade.evento.id})}"><span th:text="${atividade.evento.nome}"></span></a><br>
+					<b>Data Início: </b><span th:text="${#dates.format(atividade.dataInicio, 'dd/MM/yyyy')}"></span><br>
+					<b>Data Final: </b><span th:text="${#dates.format(atividade.dataEntrega, 'dd/MM/yyyy')}"></span>
+				</div>
+			</div>
+			<div class="container mt-3">
+				<div class="row">
+					<div class="col-12">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+ 						 Gerenciar Atividade
+					</button>
+						<a class="btn btn-primary btn-sm"
+							th:href="@{/atividade/editar(id = ${atividade.id})}">Editar</a>
+							<a class="btn btn-primary btn-sm" th:href="@{/atividade/deletar(id = ${atividade.id})}"
+							th:onclick="return confirm('Você realmente deseja excluir essa atividade?')">Deletar</a>
+						<a class="btn btn-primary btn-sm" href="/atividade">Voltar</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel"><span th:text="${atividade.nome}"></span></h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="form-group">
+		<p class="text-primary">Participantes</p>
+      <form th:object="${atividade}" th:action="@{/atividade/entregaram(id = ${atividade.id})}" method="POST">
+        <table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Grupo</th>
+				<th>Status Atividade</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="participante : ${listaParticipantes}">
+			
+				<td th:text="${participante.id}"></td>
+				<td th:text="${participante.nome}" width="40%"></td>
+				<td th:text="${participante.grupo.nome}"></td>
+				<td>
+				<input type="checkbox" th:id="${participante}" th:value="${participante.id}" th:field="${atividade.entregaram}"/>
+					<label>Concluiu</label>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="container mt-3">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a class="btn btn-primary btn-sm" th:href="@{/atividade}">Voltar</a>
+      </div>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</html>

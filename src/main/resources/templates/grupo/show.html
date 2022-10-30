@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="conteiner">
+		<div class="row">
+			<h1>Grupo #<span th:text="${grupo.id}"></span> <span th:text="${grupo.nome}"></span></h1>
+		</div>
+	</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<main>
+		<div class="container mt-4">
+			<div class="row">
+				<div class="col-12">
+				<div class="card-header">
+					<p class="text-primary">Detalhes</p>
+				</div>
+					<b>Evento: </b><a th:href="@{/evento/detalhes(id = ${grupo.evento.id})}"> <span th:text="${grupo.evento.nome}"></span></a><br>
+					<b>Pontuação de Atividades: </b> <span th:text="${grupo.pontuacaoAtividades}"></span><br>
+					<b>Pontuação de Presença: </b> <span th:text="${grupo.pontuacaoPresenca}"></span><br>
+					<b>Pontuação Total: </b> <span th:text="${grupo.pontuacaoAtividades + grupo.pontuacaoPresenca}"></span><br>
+					<b>Participantes: </b> <a th:href="@{/grupo/participantes(id = ${grupo.id})}">Participantes</a>
+				</div>
+			</div>
+			<div class="container mt-3">
+				<div class="row">
+					<div class="col-12">
+					<a class="btn btn-primary btn-sm" th:href="@{/grupo/participante/novo(id = ${grupo.id})}">Adicionar Participante</a>
+						<a class="btn btn-primary btn-sm"
+							th:href="@{/grupo/editar(id = ${grupo.id})}">Editar</a>
+							<a class="btn btn-primary btn-sm" th:href="@{/grupo/delete(id = ${grupo.id})}"
+							th:onclick="return confirm('Você realmente deseja excluir esse grupo?')">Deletar</a>
+						<a class="btn btn-primary btn-sm" href="/grupo">Voltar</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+	
+</div>
+</html>

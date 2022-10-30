@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Usuários</title>
+</head>
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+		Nenhum Usuário Cadastrado
+	</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div class="card-header">
+		<p class="text-primary">Lista de Usuários</p>
+	</div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>E-mail</th>
+				<th>4 Letras</th>
+				<th>Opções</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="usuario : ${lista}">
+				<td th:text="${usuario.id}"></td>
+				<td th:text="${usuario.nome}" width="40%"></td>
+				<td th:text="${usuario.email}"></td>
+				<td th:text="${usuario.quatroLetras}"></td>
+				<td>
+				<a class="btn btn-primary btn-sm" th:href="@{/usuario/detalhes(id = ${usuario.id})}">Detalhes</a>
+				<a class="btn btn-primary btn-sm" th:href="@{/usuario/editar(id = ${usuario.id})}">Editar</a>
+					<a class="btn btn-primary btn-sm" th:href="@{/usuario/deletar(id = ${usuario.id})}"
+						th:onclick="return confirm('Você realmente deseja excluir esse usuário?')">Deletar</a>
+					</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<div>
+	<a class="btn btn-primary btn-sm" th:href="@{usuario/novo}">Novo Usuário</a>
+	<a class="btn btn-primary btn-sm" href="/">Voltar</a>
+</div>
+</html>

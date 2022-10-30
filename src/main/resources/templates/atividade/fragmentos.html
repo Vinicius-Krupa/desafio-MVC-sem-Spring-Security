@@ -1,0 +1,26 @@
+
+<div class="conteiner" th:fragment="form">
+	<div class="form-group mb-3">
+		<label for="nome">Nome:</label> <input class="form-control"
+			type="text" th:field="*{nome}" required></input>
+		<div class="text-danger" th:if="${#fields.hasErrors('nome')}"
+			th:errors="*{nome}"></div>
+	</div>
+	<div class="form-group mb-3">
+		<label for="dataInicio">Data Início:</label> <input
+			class="form-control" type="date" th:field="*{dataInicio}"></input>
+		<div class="text-danger" th:if="${#fields.hasErrors('dataInicio')}"
+			th:errors="*{dataInicio}"></div>
+	</div>
+	<div class="form-group mb-3">
+		<label for="dataEntrega">Data Entrega:</label> <input
+			class="form-control" type="date" th:field="*{dataEntrega}"></input>
+		<div class="text-danger" th:if="${#fields.hasErrors('dataEntrega')}"
+			th:errors="*{dataEntrega}"></div>
+	</div>
+
+	<button type="submit" class="btn btn-primary">Confirmar</button>
+	<a class="btn btn-primary btn-sm" href="/evento">Voltar</a>
+	</form>
+</div>
+</div>

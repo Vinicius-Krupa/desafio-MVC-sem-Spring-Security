@@ -1,0 +1,13 @@
+
+<div class="conteiner" th:fragment="form">
+			<div class="mb-3">
+				<label class="form-label">Nome</label> <input class="form-control"
+					th:errorclass="is-invalid" type="text" th:field="*{nome}">
+				<div class="invalid-feedback" th:errors="*{nome}"></div>
+			</div>
+			<button type="submit" class="btn btn-primary">Confirmar</button>
+			<a class="btn btn-primary btn-sm" th:href="@{/grupo}">Voltar</a>
+		</form>
+	</div>
+</div>
+</div>

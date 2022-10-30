@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="conteiner">
+		<div class="row">
+			<h1>Usuário #<span th:text="${usuario.id}"></span></h1>
+		</div>
+	</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<main>
+		<div class="container mt-4">
+			<div class="row">
+				<div class="col-12">
+				<div class="card-header">
+					<p class="text-primary">Detalhes</p>
+				</div>
+					<b>Nome: </b> <span th:text="${usuario.nome}"></span><br>
+					<b>Quatro Letras: </b> <span th:text="${usuario.quatroLetras}"></span><br>
+					<b>E-mail: </b> <span th:text="${usuario.email}"></span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12">
+					<a class="btn btn-primary btn-sm" th:href="@{/usuario/editar(id = ${usuario.id})}">Editar</a>
+					<a class="btn btn-primary btn-sm" th:href="@{/usuario/deletar(id = ${usuario.id})}"
+						th:onclick="return confirm('Você realmente deseja excluir esse usuário?')">Deletar</a>
+					<a class="btn btn-primary btn-sm" href="/usuario">Voltar</a>
+				</div>
+			</div>
+		</div>
+	</main>
+	
+</div>
+</html>

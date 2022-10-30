@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<meta charset="UTF-8">
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div class="card">
+	<div class="card-header">
+		<p class="text-primary">Novo Grupo</p>
+	</div>
+	<div class="card-body">
+		<form th:object="${requisicaoFormGrupo}" th:action="@{/evento/grupo/novo(id = ${eventoId})}" method="POST">
+	
+	<div th:replace="~{grupo/fragmentos :: form}">Formulário!</div>
+</div>
+</html>

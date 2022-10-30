@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>Lista de Eventos</title>
+</head>
+<div layout:fragment="content">
+	<div class="alert alert-primary" th:if="${#lists.isEmpty(lista)}">
+		Nenhuma Atividade Cadastrado
+	</div>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div class="card-header">
+		<p class="text-primary">Lista de Atividades</p>
+	</div>
+	<div th:if="${not #lists.isEmpty(lista)}">
+		<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Evento</th>
+				<th>Data Início</th>
+				<th>Data Entrega</th>
+				<th>Opções</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="atividade : ${lista}">
+				<td th:text="${atividade.id}"></td>
+				<td th:text="${atividade.nome}" width="40%"></td>
+				<td><a th:href="@{/evento/detalhes(id = ${atividade.evento.id})}"><span th:text="${atividade.evento.nome}"></span></a>
+				</td>
+				<td th:text="${#dates.format(atividade.dataInicio, 'dd/MM/yyyy')}"></td>
+				<td th:text="${#dates.format(atividade.dataEntrega, 'dd/MM/yyyy')}"></td>
+				<td>
+				<a class="btn btn-primary btn-sm" th:href="@{/atividade/detalhes(id = ${atividade.id})}">Detalhes</a>
+				<a class="btn btn-primary btn-sm" th:href="@{/atividade/editar(id=${atividade.id})}">Editar</a>
+					<a class="btn btn-primary btn-sm" th:href="@{/atividade/deletar(id = ${atividade.id})}"
+						th:onclick="return confirm('Você realmente deseja excluir essa atividade?')">Deletar</a>
+					</td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<a class="btn btn-primary btn-sm" href="/">Voltar</a>
+	</div>
+</div>
+
+</html>

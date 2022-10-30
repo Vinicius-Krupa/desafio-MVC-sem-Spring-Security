@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>Participantes no Grupo</title>
+</head>
+<div layout:fragment="content">
+	<h1>Grupo #<span th:text="${grupo.id}"></span> <span th:text="${grupo.nome}"></span></h1>
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	
+	<div class="card-header">
+		<p class="text-primary">Participantes</p>
+	</div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Nível</th>
+				<th>E-mail</th>
+				<th>4 Letras</th>
+				<th>Opções</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="participante : ${listaParticipantes}">
+				<td th:text="${participante.id}"></td>
+				<td th:text="${participante.nome}" width="40%"></td>
+				<td th:text="${participante.nivel}"></td>
+				<td th:text="${participante.email}"></td>
+				<td th:text="${participante.quatroLetras}"></td>
+				<td>
+				<a class="btn btn-primary btn-sm" th:href="@{/participante/detalhes(id = ${participante.id})}">Detalhes</a>
+				<a class="btn btn-primary btn-sm" th:href="@{/participante/editar(id = ${participante.id})}">Editar</a>
+					<a class="btn btn-primary btn-sm" th:href="@{/participante/deletar(id = ${participante.id})}"
+						th:onclick="return confirm('Você realmente deseja excluir esse participante?')">Deletar</a>
+					</td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<a class="btn btn-primary btn-sm" th:href="@{participante/grupo/novo(id= ${grupo.id})}">Novo Participante</a>
+		<a class="btn btn-primary btn-sm" th:href="@{/grupo/detalhes(id = ${grupo.id})}">Voltar</a>
+	</div>
+</div>
+
+</html>

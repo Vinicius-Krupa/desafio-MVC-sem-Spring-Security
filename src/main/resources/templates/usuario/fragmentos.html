@@ -1,0 +1,28 @@
+
+<div class="conteiner" th:fragment="form">
+	<div class="mb-3">
+		<label class="form-label">Nome</label> <input class="form-control"
+			th:errorclass="is-invalid" type="text" th:field="*{nome}">
+		<div class="invalid-feedback" th:errors="*{nome}"></div>
+	</div>
+	<div class="mb-3">
+		<label class="form-label">4 Letras</label> <input class="form-control"
+			th:errorclass="is-invalid" type="text" th:field="*{quatroLetras}">
+		<div class="invalid-feedback" th:errors="*{quatroLetras}"></div>
+	</div>
+	<div class="mb-3">
+		<label class="form-label">E-mail</label> <input class="form-control"
+			th:errorclass="is-invalid" type="email" placeholder="exemplo@gft.com"
+			th:field="*{email}">
+		<div class="invalid-feedback" th:errors="*{email}"></div>
+	</div>
+	<div class="mb-3">
+		<label class="form-label">Senha</label> <input class="form-control"
+			th:errorclass="is-invalid" type="password" th:field="*{senha}">
+		<div class="invalid-feedback" th:errors="*{senha}"></div>
+	</div>
+	<button type="submit" class="btn btn-primary">Confirmar</button>
+	<a class="btn btn-primary btn-sm" th:href="@{/usuario}">Voltar</a>
+	</form>
+</div>
+</div>

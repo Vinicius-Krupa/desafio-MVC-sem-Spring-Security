@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/Layout"
+	layout:decorate="~{layout.html}">
+<head>
+<meta charset="UTF-8">
+<title>Grupos do Evento</title>
+</head>
+<div layout:fragment="content">
+	<h1>Evento #<span th:text="${evento.id}"></span> <span th:text="${evento.nome}"></span></h1>
+	
+	
+	<div class="alert alert-primary" th:if="${mensagem != null}" th:text="${mensagem}"></div>
+	<div class="card-header">
+		<p class="text-primary">Grupos</p>
+	</div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Nome</th>
+				<th>Participantes</th>
+				<th>Opções</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="grupo : ${listaGrupos}">
+				<td th:text="${grupo.id}"></td>
+				<td th:text="${grupo.nome}" width="40%"></td>
+				<td><a class="btn btn-primary btn-sm" th:href="@{/grupo/participantes(id = ${grupo.id})}">Ver Participantes</a>
+				</td>
+				<td>
+				<a class="btn btn-primary btn-sm" th:href="@{/grupo/detalhes(id = ${grupo.id})}">Detalhes</a>
+				<a class="btn btn-primary btn-sm" th:href="@{/grupo/editar(id = ${grupo.id})}">Editar</a>
+					<a class="btn btn-primary btn-sm" th:href="@{/grupo/deletar(id = ${grupo.id})}"
+						th:onclick="return confirm('Você realmente deseja excluir esse grupo?')">Deletar</a>
+					</td>
+			</tr>
+		</tbody>
+	</table>
+	<div>
+		<a class="btn btn-primary btn-sm" th:href="@{/evento/grupo/novo(id= ${evento.id})}">Novo Grupo</a>
+		<a class="btn btn-primary btn-sm" th:href="@{/evento/detalhes(id= ${evento.id})}">Voltar</a>
+	</div>
+</div>
+
+</html>
